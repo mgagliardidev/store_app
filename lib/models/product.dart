@@ -1,7 +1,3 @@
-import 'dart:ffi';
-
-import 'package:json_annotation/json_annotation.dart';
-
 class Product {
   final String id;
   final String name;

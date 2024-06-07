@@ -46,18 +46,69 @@ class _HomePageState extends ConsumerState<HomePage> {
           )
         ],
       ),
-      body: Column(children: [
-        Expanded(
-          child: ListView.builder(
-            itemCount: productList.length,
-            itemBuilder: (BuildContext context, int index) {
-              return ListTile(
-                title: Text(productList[index].name),
-              );
-            },
-          ),
-        )
-      ]),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 27, vertical: 20),
+        child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              // search bar
+              // TODO export widget
+              SearchAnchor(builder: ((context, controller) {
+                return SearchBar(
+                  controller: controller,
+                  elevation: MaterialStateProperty.all(3),
+                  backgroundColor: MaterialStateProperty.all(Colors.white),
+                  onTap: () {
+                    controller.openView();
+                  },
+                  onChanged: (_) {
+                    controller.openView();
+                  },
+                  leading: const Icon(Icons.search),
+                );
+              }), suggestionsBuilder: ((context, controller) {
+                return List<ListTile>.generate(5, (index) {
+                  final String item = 'Item $index';
+                  return ListTile(
+                    title: Text(item),
+                    onTap: () {
+                      setState(() {
+                        controller.closeView(item);
+                      });
+                    },
+                  );
+                });
+              })),
+              const SizedBox(height: 15),
+              // banner
+              GestureDetector(
+                onTap: () {},
+                child: Container(
+                  alignment: Alignment.center,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(40),
+                    child: Image.asset(
+                      'assets/images/promo_banner_50.jpeg',
+                      fit: BoxFit.fill,
+                      height: 160,
+                      width: double.infinity,
+                    ),
+                  ),
+                ),
+              )
+              // Expanded(
+              //   child: ListView.builder(
+              //     itemCount: productList.length,
+              //     itemBuilder: (BuildContext context, int index) {
+              //       return ListTile(
+              //         title: Text(productList[index].name),
+              //       );
+              //     },
+              //   ),
+              // )
+            ]),
+      ),
     );
   }
 }

@@ -8,11 +8,6 @@ part 'product_provider.g.dart';
 final productServices = Provider((ref) => ProductService());
 List<Product> productList = [];
 
-// final productsProvider = FutureProvider<List<Product>>((ref) async {
-//   productList = await ref.read(productServices).fetchData();
-//   return productList;
-// });
-
 @riverpod
 Future<List<Product>> products(ref) async {
   productList = await ref.read(productServices).fetchData();
