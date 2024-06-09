@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:store_app/components/custom_delegate_searchbar.dart';
+import 'package:store_app/components/promo_banner.dart';
 import 'package:store_app/models/product.dart';
 import 'package:store_app/providers/product_provider.dart';
 
@@ -28,9 +31,21 @@ class _HomePageState extends ConsumerState<HomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Hi, Matteo!', //TODO: replace with username
-          style: TextStyle(fontWeight: FontWeight.bold),
+        title: RichText(
+          text: const TextSpan(children: [
+            TextSpan(
+                text: 'Hi Matteo!\n',
+                style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    color: Colors.grey,
+                    fontSize: 18)),
+            TextSpan(
+                text: 'Welcome to Shop!',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                    fontSize: 21))
+          ]),
         ),
         actions: [
           ElevatedButton(
@@ -52,51 +67,13 @@ class _HomePageState extends ConsumerState<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              // search bar
-              // TODO export widget
-              SearchAnchor(builder: ((context, controller) {
-                return SearchBar(
-                  controller: controller,
-                  elevation: MaterialStateProperty.all(3),
-                  backgroundColor: MaterialStateProperty.all(Colors.white),
-                  onTap: () {
-                    controller.openView();
-                  },
-                  onChanged: (_) {
-                    controller.openView();
-                  },
-                  leading: const Icon(Icons.search),
-                );
-              }), suggestionsBuilder: ((context, controller) {
-                return List<ListTile>.generate(5, (index) {
-                  final String item = 'Item $index';
-                  return ListTile(
-                    title: Text(item),
-                    onTap: () {
-                      setState(() {
-                        controller.closeView(item);
-                      });
-                    },
-                  );
-                });
-              })),
-              const SizedBox(height: 15),
-              // banner
-              GestureDetector(
-                onTap: () {},
-                child: Container(
-                  alignment: Alignment.center,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(40),
-                    child: Image.asset(
-                      'assets/images/promo_banner_50.jpeg',
-                      fit: BoxFit.fill,
-                      height: 160,
-                      width: double.infinity,
-                    ),
-                  ),
-                ),
-              )
+              // SEARCH BAR
+              const CustomDelegateSearchbar(),
+              const SizedBox(height: 20),
+              // BANNER
+              PromoBanner(
+                  imagePath: 'assets/images/promo_banner_50.jpeg',
+                  onTap: () {}),
               // Expanded(
               //   child: ListView.builder(
               //     itemCount: productList.length,

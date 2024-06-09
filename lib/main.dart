@@ -3,6 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:store_app/pages/home_page.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+// themes
+import 'themes/default_theme.dart';
+import 'themes/dark_theme.dart';
+
 Future<void> main() async {
   const String url = 'https://qacvdvtoeywofwvgzgie.supabase.co';
   const String anonKey =
@@ -16,10 +20,13 @@ final supabase = Supabase.instance.client;
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
 
+  final bool useDarkTheme = false;
+
   @override
   Widget build(BuildContext context) {
+    final ThemeData selectedTheme = useDarkTheme ? darkTheme : defaultTheme;
     return MaterialApp(
-      theme: ThemeData(fontFamily: 'Roboto'),
+      theme: selectedTheme,
       home: const HomePage(),
     );
   }
