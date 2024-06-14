@@ -21,4 +21,15 @@ ThemeData defaultTheme = ThemeData(
         elevation: MaterialStateProperty.all(0)),
     textTheme: const TextTheme().apply(bodyColor: Colors.black),
     textSelectionTheme:
-        const TextSelectionThemeData(cursorColor: Colors.black26));
+        const TextSelectionThemeData(cursorColor: Colors.black26),
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+        unselectedItemColor: Colors.black87,
+        elevation: 2,
+        backgroundColor: secondaryColor,
+        unselectedIconTheme: IconThemeData(fill: 0),
+        selectedIconTheme: IconThemeData(fill: 1),
+        selectedLabelStyle: TextStyle(color: Colors.black87),
+        unselectedLabelStyle: TextStyle(color: Colors.black87),
+        showSelectedLabels: true,
+        showUnselectedLabels: true,
+        selectedItemColor: Colors.black87));

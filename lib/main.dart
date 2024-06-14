@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:store_app/pages/home_page.dart';
+import 'package:store_app/pages/main_page.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 // themes
@@ -27,7 +27,7 @@ class MainApp extends StatelessWidget {
     final ThemeData selectedTheme = useDarkTheme ? darkTheme : defaultTheme;
     return MaterialApp(
       theme: selectedTheme,
-      home: const HomePage(),
+      home: MainPage(),
     );
   }
 }

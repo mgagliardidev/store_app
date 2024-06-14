@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:store_app/components/custom_delegate_searchbar.dart';
 import 'package:store_app/components/product_card.dart';
