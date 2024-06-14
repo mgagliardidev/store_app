@@ -10,6 +10,8 @@ List<Product> productList = [];
 
 @riverpod
 Future<List<Product>> products(ref) async {
-  productList = await ref.read(productServices).fetchData();
+  if (productList.isEmpty) {
+    productList = await ref.read(productServices).fetchData();
+  }
   return productList;
 }
