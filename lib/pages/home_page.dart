@@ -91,21 +91,18 @@ class _HomePageState extends ConsumerState<HomePage> {
                           onTap: () {}),
                       const SizedBox(height: 20),
                       // PRODUCTS
-                      Container(
-                          child: GridView.count(
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              childAspectRatio: (itemWidth / itemHeight),
-                              crossAxisCount: _crossAxisCount,
-                              crossAxisSpacing: _crossAxisSpacing,
-                              mainAxisSpacing: _mainAxisSpacing,
-                              children:
-                                  List.generate(productList.length, (index) {
-                                return ProductCard(
-                                    product: productList[index],
-                                    cardWidth: itemWidth,
-                                    cardHeight: itemHeight);
-                              })))
+                      GridView.count(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          childAspectRatio: (itemWidth / itemHeight),
+                          crossAxisCount: _crossAxisCount,
+                          crossAxisSpacing: _crossAxisSpacing,
+                          mainAxisSpacing: _mainAxisSpacing,
+                          children: List.generate(productList.length, (index) {
+                            return ProductCard(
+                              product: productList[index],
+                            );
+                          }))
                     ]),
               ),
             ),
