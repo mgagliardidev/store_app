@@ -16,6 +16,7 @@ ThemeData defaultTheme = ThemeData(
   ),
   appBarTheme: const AppBarTheme(
     backgroundColor: backgroundColor,
+    actionsIconTheme: IconThemeData(color: Colors.black87),
   ),
   searchBarTheme: SearchBarThemeData(
       backgroundColor:

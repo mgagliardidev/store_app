@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:store_app/pages/main_page.dart';
+import 'package:store_app/providers/logic_provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 // themes
@@ -17,14 +18,13 @@ Future<void> main() async {
 
 final supabase = Supabase.instance.client;
 
-class MainApp extends StatelessWidget {
+class MainApp extends ConsumerWidget {
   const MainApp({super.key});
 
-  final bool useDarkTheme = false;
-
   @override
-  Widget build(BuildContext context) {
-    final ThemeData selectedTheme = useDarkTheme ? darkTheme : defaultTheme;
+  Widget build(BuildContext context, WidgetRef ref) {
+    final ThemeData selectedTheme =
+        ref.watch(useDarkThemeProvider) ? darkTheme : defaultTheme;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: selectedTheme,

@@ -4,6 +4,7 @@ import 'package:store_app/pages/cart_page.dart';
 import 'package:store_app/pages/favourites_page.dart';
 import 'package:store_app/pages/home_page.dart';
 import 'package:store_app/pages/profile_page.dart';
+import 'package:store_app/pages/settings_page.dart';
 import 'package:store_app/providers/logic_provider.dart';
 
 class MainPage extends ConsumerWidget {
@@ -13,7 +14,8 @@ class MainPage extends ConsumerWidget {
     const HomePage(),
     const FavouritesPage(),
     const CartPage(),
-    const ProfilePage()
+    const ProfilePage(),
+    const SettingsPage()
   ];
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -43,6 +45,10 @@ class MainPage extends ConsumerWidget {
               icon: Icon(Icons.person_outline),
               label: 'Profile',
               activeIcon: Icon(Icons.person)),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.settings_outlined),
+              label: 'Settings',
+              activeIcon: Icon(Icons.settings)),
         ],
       ),
     );

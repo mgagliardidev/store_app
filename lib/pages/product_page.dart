@@ -92,73 +92,69 @@ class _ProductPageState extends ConsumerState<ProductPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Expanded(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 25),
-              // Product Name and Price
-              Text(
-                widget.product.name,
-                style:
-                    const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-              ),
-              Row(
-                children: [
-                  Text(
-                    "\$${widget.product.price}",
-                    style: const TextStyle(
-                        fontSize: 20, fontWeight: FontWeight.w300),
-                  ),
-                  const Spacer(),
-                  RichText(
-                      text: TextSpan(children: [
-                    TextSpan(
-                      text: widget.product.stars.toString(),
-                      style: TextStyle(
-                          color: Theme.of(context).colorScheme.tertiary,
-                          fontSize: 18),
-                    ),
-                    const WidgetSpan(
-                        child: Icon(Icons.star, color: Colors.amber, size: 20)),
-                  ]))
-                ],
-              ),
-              const SizedBox(height: 25),
-              // Product Description
-              const Text(
-                "Product Details",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-              ),
-              Text(
-                widget.product.description,
-                style:
-                    const TextStyle(fontSize: 16, fontWeight: FontWeight.w300),
-              ),
-              const SizedBox(height: 25),
-              // Shipping info
-              RichText(
-                  text: TextSpan(children: [
-                TextSpan(
-                  text: "Shipping Info ",
-                  style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                      color: Theme.of(context).colorScheme.tertiary),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 25),
+            // Product Name and Price
+            Text(
+              widget.product.name,
+              style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+            ),
+            Row(
+              children: [
+                Text(
+                  "\$${widget.product.price}",
+                  style: const TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.w300),
                 ),
-                const WidgetSpan(
-                    child: Icon(
-                  Icons.local_shipping,
-                  size: 18,
-                ))
-              ])),
-              const Text(
-                "Free Shipping 3/4 business days",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w300),
+                const Spacer(),
+                RichText(
+                    text: TextSpan(children: [
+                  TextSpan(
+                    text: widget.product.stars.toString(),
+                    style: TextStyle(
+                        color: Theme.of(context).colorScheme.tertiary,
+                        fontSize: 18),
+                  ),
+                  const WidgetSpan(
+                      child: Icon(Icons.star, color: Colors.amber, size: 20)),
+                ]))
+              ],
+            ),
+            const SizedBox(height: 25),
+            // Product Description
+            const Text(
+              "Product Details",
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+            ),
+            Text(
+              widget.product.description,
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w300),
+            ),
+            const SizedBox(height: 25),
+            // Shipping info
+            RichText(
+                text: TextSpan(children: [
+              TextSpan(
+                text: "Shipping Info ",
+                style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                    color: Theme.of(context).colorScheme.tertiary),
               ),
-            ],
-          ),
+              const WidgetSpan(
+                  child: Icon(
+                Icons.local_shipping,
+                size: 18,
+              ))
+            ])),
+            const Text(
+              "Free Shipping 3/4 business days",
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w300),
+            ),
+          ],
         ),
       ),
       floatingActionButton: Padding(
@@ -173,14 +169,14 @@ class _ProductPageState extends ConsumerState<ProductPage> {
                   borderRadius: BorderRadius.circular(60),
                 ),
                 child: RichText(
-                    text: const TextSpan(children: [
+                    text: TextSpan(children: [
                   TextSpan(
                       text: "Add to Cart  ",
                       style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                      )),
-                  WidgetSpan(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                          color: Theme.of(context).colorScheme.primary)),
+                  const WidgetSpan(
                       child: Icon(
                     Icons.shopping_cart,
                     size: 20,

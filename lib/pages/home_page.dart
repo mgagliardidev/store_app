@@ -39,8 +39,8 @@ class _HomePageState extends ConsumerState<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: RichText(
-          text: const TextSpan(children: [
-            TextSpan(
+          text: TextSpan(children: [
+            const TextSpan(
                 text: 'Hi Matteo!\n',
                 style: TextStyle(
                     fontWeight: FontWeight.w500,
@@ -50,8 +50,8 @@ class _HomePageState extends ConsumerState<HomePage> {
                 text: 'Welcome to Shop!',
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                    fontSize: 21))
+                    fontSize: 21,
+                    color: Theme.of(context).colorScheme.tertiary))
           ]),
         ),
         actions: [
