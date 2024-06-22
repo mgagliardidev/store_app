@@ -16,7 +16,7 @@ class _ProductPageState extends ConsumerState<ProductPage> {
   int activeIndex = 0;
   late PageController _pageController;
   static const double borderRadius = 40;
-  static const double sizeFactor = 0.37;
+  static const double sizeFactor = 0.45;
 
   @override
   void initState() {
@@ -47,14 +47,31 @@ class _ProductPageState extends ConsumerState<ProductPage> {
                 itemBuilder: (context, index) {
                   return Padding(
                     padding:
-                        const EdgeInsets.only(right: 11.0, left: 11.0, top: 0),
+                        const EdgeInsets.only(right: 20.0, left: 20.0, top: 10),
                     child: ClipRRect(
                       borderRadius: const BorderRadius.only(
                           bottomLeft: Radius.circular(borderRadius),
-                          bottomRight: Radius.circular(borderRadius)),
+                          bottomRight: Radius.circular(borderRadius),
+                          topRight: Radius.circular(borderRadius),
+                          topLeft: Radius.circular(borderRadius)),
                       child: productImages[index],
                     ),
                   );
+                },
+              ),
+            ),
+            Positioned(
+              top: 45,
+              right: 30,
+              child: IconButton(
+                style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                        Colors.grey.withOpacity(0.5))),
+                icon: const Icon(Icons.favorite_border, color: Colors.black),
+                selectedIcon: const Icon(Icons.favorite, color: Colors.black),
+                isSelected: false,
+                onPressed: () {
+                  // TODO: Add favorite logic
                 },
               ),
             ),
@@ -73,9 +90,109 @@ class _ProductPageState extends ConsumerState<ProductPage> {
           ),
         ),
       ),
-      body: const Center(
-        child: Text('Product Page'),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Expanded(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 25),
+              // Product Name and Price
+              Text(
+                widget.product.name,
+                style:
+                    const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+              ),
+              Row(
+                children: [
+                  Text(
+                    "\$${widget.product.price}",
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.w300),
+                  ),
+                  const Spacer(),
+                  RichText(
+                      text: TextSpan(children: [
+                    TextSpan(
+                      text: widget.product.stars.toString(),
+                      style: TextStyle(
+                          color: Theme.of(context).colorScheme.tertiary,
+                          fontSize: 18),
+                    ),
+                    const WidgetSpan(
+                        child: Icon(Icons.star, color: Colors.amber, size: 20)),
+                  ]))
+                ],
+              ),
+              const SizedBox(height: 25),
+              // Product Description
+              const Text(
+                "Product Details",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+              ),
+              Text(
+                widget.product.description,
+                style:
+                    const TextStyle(fontSize: 16, fontWeight: FontWeight.w300),
+              ),
+              const SizedBox(height: 25),
+              // Shipping info
+              RichText(
+                  text: TextSpan(children: [
+                TextSpan(
+                  text: "Shipping Info ",
+                  style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                      color: Theme.of(context).colorScheme.tertiary),
+                ),
+                const WidgetSpan(
+                    child: Icon(
+                  Icons.local_shipping,
+                  size: 18,
+                ))
+              ])),
+              const Text(
+                "Free Shipping 3/4 business days",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w300),
+              ),
+            ],
+          ),
+        ),
       ),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            SizedBox(
+              width: 300,
+              child: FloatingActionButton(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(60),
+                ),
+                child: RichText(
+                    text: const TextSpan(children: [
+                  TextSpan(
+                      text: "Add to Cart  ",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                      )),
+                  WidgetSpan(
+                      child: Icon(
+                    Icons.shopping_cart,
+                    size: 20,
+                  ))
+                ])),
+                onPressed: () {},
+              ),
+            )
+          ],
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 

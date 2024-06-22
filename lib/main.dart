@@ -26,6 +26,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData selectedTheme = useDarkTheme ? darkTheme : defaultTheme;
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: selectedTheme,
       home: MainPage(),
     );
