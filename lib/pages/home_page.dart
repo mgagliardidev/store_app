@@ -32,7 +32,6 @@ class _HomePageState extends ConsumerState<HomePage> {
     final productList = fetchData();
     var size = MediaQuery.of(context).size;
 
-    /*24 is for notification bar on Android*/
     final double itemHeight = (size.height - kToolbarHeight - 24) / 2.8;
     final double itemWidth = size.width / 2;
 

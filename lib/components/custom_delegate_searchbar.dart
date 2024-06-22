@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:store_app/pages/search_results_page.dart';
 
 class CustomDelegateSearchbar extends StatefulWidget {
   const CustomDelegateSearchbar({super.key});
@@ -13,12 +14,22 @@ class _CustomDelegateSearchbarState extends State<CustomDelegateSearchbar> {
   Widget build(BuildContext context) {
     return SearchAnchor(builder: ((context, controller) {
       return SearchBar(
+        hintText: "Search for product...",
+        hintStyle: MaterialStateProperty.all(
+          const TextStyle(fontWeight: FontWeight.w200),
+        ),
         controller: controller,
         onTap: () {
-          controller.openView();
+          //controller.openView();
         },
         onChanged: (_) {
-          controller.openView();
+          //controller.openView();
+        },
+        onSubmitted: (value) {
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => SearchResultsPage(
+                    query: value,
+                  )));
         },
         leading: const Icon(Icons.search),
       );

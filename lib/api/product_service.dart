@@ -7,6 +7,17 @@ class ProductService {
     return response.map<Product>((e) => Product.fromJson(e)).toList();
   }
 
+  Future<List<Product>> fetchDataBySearch(String query) {
+    final response = supabase
+        .from('products')
+        .select()
+        .or('name.ilike.%$query%,description.ilike.%$query%')
+        .withConverter<List<Product>>(
+            (data) => data.map(Product.fromJson).toList());
+
+    return response;
+  }
+
   String getImageUrl(String imagePath) {
     return supabase.storage
         .from('products_images')
