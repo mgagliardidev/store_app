@@ -1,11 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:store_app/api/product_service.dart';
 import 'package:store_app/components/custom_delegate_searchbar.dart';
 import 'package:store_app/components/product_card.dart';
 import 'package:store_app/models/product.dart';
-import 'package:store_app/pages/home_page.dart';
 import 'package:store_app/pages/main_page.dart';
 
 class SearchResultsPage extends StatefulWidget {

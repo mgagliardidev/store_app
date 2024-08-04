@@ -3,8 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:store_app/pages/cart_page.dart';
 import 'package:store_app/pages/favourites_page.dart';
 import 'package:store_app/pages/home_page.dart';
+import 'package:store_app/pages/login_page.dart';
 import 'package:store_app/pages/profile_page.dart';
-import 'package:store_app/pages/settings_page.dart';
 import 'package:store_app/providers/logic_provider.dart';
 
 class MainPage extends ConsumerWidget {
@@ -15,7 +15,8 @@ class MainPage extends ConsumerWidget {
     const FavouritesPage(),
     const CartPage(),
     const ProfilePage(),
-    const SettingsPage()
+    //const SettingsPage()
+    const LoginPage()
   ];
   @override
   Widget build(BuildContext context, WidgetRef ref) {
