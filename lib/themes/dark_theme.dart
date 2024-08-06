@@ -14,10 +14,10 @@ ThemeData darkTheme = ThemeData(
       tertiary: tertiaryColor,
       surface: backgroundColor,
     ),
-    appBarTheme: const AppBarTheme(
-      backgroundColor: backgroundColor,
-      iconTheme: IconThemeData(color: Colors.black87),
-      actionsIconTheme: IconThemeData(color: Colors.black87),
+    appBarTheme: AppBarTheme(
+      backgroundColor: ThemeData.dark().primaryColor,
+      iconTheme: const IconThemeData(color: Colors.black87),
+      actionsIconTheme: const IconThemeData(color: Colors.black87),
     ),
     searchBarTheme: SearchBarThemeData(
         backgroundColor:
