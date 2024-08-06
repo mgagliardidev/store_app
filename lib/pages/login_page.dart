@@ -42,9 +42,9 @@ class _LoginPageState extends State<LoginPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                // Company Name
+                // Company Logo
                 const Text(
-                  'My Company',
+                  'MyStore',
                   style: TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.bold,
@@ -53,17 +53,17 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 const SizedBox(height: 40),
 
-                // Email TextField
+                // EMAIL
                 _buildCredentialsInput("Email", _emailController),
 
                 const SizedBox(height: 20),
 
-                // Password TextField
+                // PASSWORD
                 _buildCredentialsInput("Password", _passwordController),
 
                 const SizedBox(height: 20),
 
-                // Login Button
+                // LOGIN
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Theme.of(context).colorScheme.tertiary,
@@ -76,7 +76,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 const SizedBox(height: 20),
 
-                //apple and google login buttons
+                // APPLE/GOOGLE
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -91,7 +91,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 const SizedBox(height: 40),
 
-                // Sign Up Button
+                // SIGN UP
                 Center(
                   child: RichText(
                     text: TextSpan(
@@ -107,6 +107,30 @@ class _LoginPageState extends State<LoginPage> {
                       ],
                     ),
                   ),
+                ),
+
+                const SizedBox(height: 40),
+
+                // W/O ACCOUNT
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Theme.of(context).colorScheme.secondary,
+                      minimumSize: const Size(0, 60)),
+                  onPressed: _login,
+                  child: RichText(
+                      text: TextSpan(
+                          style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                              color: Theme.of(context).colorScheme.tertiary),
+                          children: [
+                        const TextSpan(
+                          text: 'Continue wihout an account',
+                        ),
+                        WidgetSpan(
+                            child: Icon(Icons.arrow_forward,
+                                color: Theme.of(context).colorScheme.tertiary))
+                      ])),
                 ),
               ]),
         ));
@@ -140,12 +164,14 @@ class _LoginPageState extends State<LoginPage> {
         decoration: BoxDecoration(
           shape: BoxShape.rectangle,
           borderRadius: BorderRadius.circular(8),
-          color: Colors.grey[200],
+          color: Colors.grey[300],
         ),
         child: Padding(
-          padding: const EdgeInsets.all(0),
-          child: Image.asset(imagePath),
-        ),
+            padding: const EdgeInsets.all(5),
+            child: Image(
+              image: AssetImage(imagePath),
+              fit: BoxFit.fill,
+            )),
       ),
     );
   }
