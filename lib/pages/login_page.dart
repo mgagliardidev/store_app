@@ -14,20 +14,11 @@ class _LoginPageState extends State<LoginPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
-  void _login() {
-    // Implement login logic here
-    print('Login with email: ${_emailController.text}');
-  }
+  void _login() {}
 
-  void _signInWithGoogle() {
-    // Implement Google login logic here
-    print('Login with Google');
-  }
+  void _signInWithGoogle() {}
 
-  void _signInWithApple() {
-    // Implement Apple login logic here
-    print('Login with Apple');
-  }
+  void _signInWithApple() {}
 
   void _goToSignUp() {
     Navigator.push(
