@@ -38,7 +38,7 @@ class ProductCard extends StatelessWidget {
                 right: 8,
                 child: IconButton(
                   style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(
+                      backgroundColor: WidgetStateProperty.all<Color>(
                           Colors.grey.withOpacity(0.5))),
                   icon: const Icon(Icons.favorite_border, color: Colors.black),
                   selectedIcon: const Icon(Icons.favorite, color: Colors.black),

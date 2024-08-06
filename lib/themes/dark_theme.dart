@@ -12,7 +12,7 @@ ThemeData darkTheme = ThemeData(
       primary: primaryColor,
       secondary: secondaryColor,
       tertiary: tertiaryColor,
-      background: backgroundColor,
+      surface: backgroundColor,
     ),
     appBarTheme: const AppBarTheme(
       backgroundColor: backgroundColor,
@@ -21,8 +21,8 @@ ThemeData darkTheme = ThemeData(
     ),
     searchBarTheme: SearchBarThemeData(
         backgroundColor:
-            MaterialStateColor.resolveWith((states) => secondaryColor),
-        elevation: MaterialStateProperty.all(0)),
+            WidgetStateColor.resolveWith((states) => secondaryColor),
+        elevation: WidgetStateProperty.all(0)),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         unselectedItemColor: Colors.white,
         elevation: 2,
