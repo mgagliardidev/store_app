@@ -1,5 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:store_app/pages/main_page.dart';
+import 'package:store_app/pages/signup_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -28,8 +30,14 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _goToSignUp() {
-    // Navigate to the Sign Up page
-    print('Navigate to Sign Up page');
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => const SignUpPage()));
+  }
+
+  void _goToHomePage() async {
+    // Navigate to the Home page
+    Route route = MaterialPageRoute(builder: (context) => MainPage());
+    await Navigator.pushReplacement(context, route);
   }
 
   @override
@@ -59,7 +67,8 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(height: 20),
 
                 // PASSWORD
-                _buildCredentialsInput("Password", _passwordController),
+                _buildCredentialsInput("Password", _passwordController,
+                    privacyField: true),
 
                 const SizedBox(height: 20),
 
@@ -116,7 +125,7 @@ class _LoginPageState extends State<LoginPage> {
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Theme.of(context).colorScheme.secondary,
                       minimumSize: const Size(0, 60)),
-                  onPressed: _login,
+                  onPressed: _goToHomePage,
                   child: RichText(
                       text: TextSpan(
                           style: TextStyle(
@@ -136,10 +145,13 @@ class _LoginPageState extends State<LoginPage> {
         ));
   }
 
-  Widget _buildCredentialsInput(
-      String label, TextEditingController controller) {
+  Widget _buildCredentialsInput(String label, TextEditingController controller,
+      {bool privacyField = false}) {
     return TextField(
       controller: controller,
+      obscureText: privacyField,
+      enableSuggestions: !privacyField,
+      autocorrect: !privacyField,
       decoration: InputDecoration(
         labelText: label,
         floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -172,22 +184,6 @@ class _LoginPageState extends State<LoginPage> {
               image: AssetImage(imagePath),
               fit: BoxFit.fill,
             )),
-      ),
-    );
-  }
-}
-
-class SignUpPage extends StatelessWidget {
-  const SignUpPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Sign Up'),
-      ),
-      body: const Center(
-        child: Text('Sign Up Page'),
       ),
     );
   }

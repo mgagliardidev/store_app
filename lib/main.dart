@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:store_app/pages/main_page.dart';
+import 'package:store_app/pages/login_page.dart';
 import 'package:store_app/providers/logic_provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -28,7 +28,7 @@ class MainApp extends ConsumerWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: selectedTheme,
-      home: MainPage(),
+      home: const LoginPage(),
     );
   }
 }
