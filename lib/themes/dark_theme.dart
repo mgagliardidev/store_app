@@ -12,17 +12,17 @@ ThemeData darkTheme = ThemeData(
       primary: primaryColor,
       secondary: secondaryColor,
       tertiary: tertiaryColor,
-      background: backgroundColor,
+      surface: backgroundColor,
     ),
-    appBarTheme: const AppBarTheme(
-      backgroundColor: backgroundColor,
-      iconTheme: IconThemeData(color: Colors.black87),
-      actionsIconTheme: IconThemeData(color: Colors.black87),
+    appBarTheme: AppBarTheme(
+      backgroundColor: ThemeData.dark().primaryColor,
+      iconTheme: const IconThemeData(color: Colors.black87),
+      actionsIconTheme: const IconThemeData(color: Colors.black87),
     ),
     searchBarTheme: SearchBarThemeData(
         backgroundColor:
-            MaterialStateColor.resolveWith((states) => secondaryColor),
-        elevation: MaterialStateProperty.all(0)),
+            WidgetStateColor.resolveWith((states) => secondaryColor),
+        elevation: WidgetStateProperty.all(0)),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         unselectedItemColor: Colors.white,
         elevation: 2,

@@ -15,7 +15,7 @@ class _CustomDelegateSearchbarState extends State<CustomDelegateSearchbar> {
     return SearchAnchor(builder: ((context, controller) {
       return SearchBar(
         hintText: "Search for product...",
-        hintStyle: MaterialStateProperty.all(
+        hintStyle: WidgetStateProperty.all(
           const TextStyle(fontWeight: FontWeight.w200),
         ),
         controller: controller,
