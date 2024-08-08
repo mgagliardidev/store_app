@@ -5,26 +5,21 @@ import 'package:store_app/components/product_horizontal_card.dart';
 import 'package:store_app/models/product.dart';
 import 'package:store_app/models/user_info.dart';
 import 'package:store_app/providers/user_provider.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 class FavouritesPage extends ConsumerWidget {
   const FavouritesPage({super.key});
 
-  UserInfo fetchUserInfo(WidgetRef ref) {
-    if (Supabase.instance.client.auth.currentUser == null) {
-      return UserInfo(userName: '', favPrdoucts: [], cartProducts: []);
-    }
-
-    final data =
-        ref.watch(userProvider(Supabase.instance.client.auth.currentUser!.id));
-    return data.value ??
-        UserInfo(userName: '', favPrdoucts: [], cartProducts: []);
-  }
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final userInfo = fetchUserInfo(ref);
+    final userInfo = ref.watch(userInfoNotifierProvider).when(
+        data: (data) => data,
+        error: (s, t) =>
+            UserInfo(userName: '', favPrdoucts: [], cartProducts: []),
+        loading: () =>
+            UserInfo(userName: '', favPrdoucts: [], cartProducts: []));
     ProductService productService = ProductService();
+    final products =
+        productService.fetchRecordsById(userInfo.favPrdoucts ?? []);
 
     return Scaffold(
       appBar: AppBar(
@@ -36,18 +31,12 @@ class FavouritesPage extends ConsumerWidget {
       body: Padding(
           padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 30.0),
           child: FutureBuilder(
-              future:
-                  productService.fetchRecordsById(userInfo.favPrdoucts ?? []),
+              future: products,
               builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(child: CircularProgressIndicator());
-                } else if (snapshot.hasData) {
-                  return _buildList(snapshot.data);
-                } else if (snapshot.hasError) {
-                  return const Text('Failed to load favourites');
-                } else {
-                  return const Text('No favourites yet');
+                if (snapshot.hasData) {
+                  return _buildList(snapshot.data as List<Product>?);
                 }
+                return const Center(child: CircularProgressIndicator());
               })),
     );
   }
@@ -56,6 +45,7 @@ class FavouritesPage extends ConsumerWidget {
     if (favPrdoucts == null || favPrdoucts.isEmpty) {
       return const Center(child: Text('No favourites yet'));
     }
+
     return ListView.builder(
       itemCount: favPrdoucts.length,
       itemBuilder: (context, index) {

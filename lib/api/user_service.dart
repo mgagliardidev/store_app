@@ -12,4 +12,10 @@ class UserService {
 
     return response[0];
   }
+
+  Future<void> updateFavProducts(String id, List<String> productsIds) async {
+    await supabase
+        .from('user_info')
+        .update({'fav_products': productsIds}).eq('user_id', id);
+  }
 }

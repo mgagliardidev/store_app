@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:store_app/api/product_service.dart';
 import 'package:store_app/models/product.dart';
+import 'package:store_app/models/user_info.dart';
+import 'package:store_app/providers/user_provider.dart';
 
 class ProductPage extends ConsumerStatefulWidget {
   final Product product;
@@ -27,6 +29,13 @@ class _ProductPageState extends ConsumerState<ProductPage> {
 
   @override
   Widget build(BuildContext context) {
+    final userInfo = ref.watch(userInfoNotifierProvider).when(
+        data: (data) => data,
+        error: (s, t) =>
+            UserInfo(userName: '', favPrdoucts: [], cartProducts: []),
+        loading: () =>
+            UserInfo(userName: '', favPrdoucts: [], cartProducts: []));
+    final bool isFavourite = userInfo.favPrdoucts!.contains(widget.product.id);
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: MediaQuery.of(context).size * sizeFactor,
@@ -69,9 +78,17 @@ class _ProductPageState extends ConsumerState<ProductPage> {
                         Colors.grey.withOpacity(0.5))),
                 icon: const Icon(Icons.favorite_border, color: Colors.black),
                 selectedIcon: const Icon(Icons.favorite, color: Colors.black),
-                isSelected: false,
-                onPressed: () {
-                  // TODO: Add favorite logic
+                isSelected: isFavourite,
+                onPressed: () async {
+                  List<String> updatedFavProducts = userInfo.favPrdoucts!;
+                  if (isFavourite) {
+                    updatedFavProducts.remove(widget.product.id);
+                  } else {
+                    updatedFavProducts.add(widget.product.id);
+                  }
+                  ref
+                      .read(userInfoNotifierProvider.notifier)
+                      .updateFavProducts(updatedFavProducts);
                 },
               ),
             ),

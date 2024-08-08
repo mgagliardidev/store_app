@@ -27,24 +27,18 @@ class _HomePageState extends ConsumerState<HomePage> {
     return data.value ?? [];
   }
 
-  UserInfo fetchUserInfo() {
-    if (Supabase.instance.client.auth.currentUser == null) {
-      return UserInfo(userName: '', favPrdoucts: [], cartProducts: []);
-    }
-
-    final data =
-        ref.watch(userProvider(Supabase.instance.client.auth.currentUser!.id));
-    return data.value ??
-        UserInfo(userName: '', favPrdoucts: [], cartProducts: []);
-  }
-
   final double _crossAxisSpacing = 5, _mainAxisSpacing = 9;
   final int _crossAxisCount = 2;
 
   @override
   Widget build(BuildContext context) {
     final productList = fetchData();
-    final userInfo = fetchUserInfo();
+    final userInfo = ref.watch(userInfoNotifierProvider).when(
+        data: (data) => data,
+        error: (s, t) =>
+            UserInfo(userName: '', favPrdoucts: [], cartProducts: []),
+        loading: () =>
+            UserInfo(userName: '', favPrdoucts: [], cartProducts: []));
 
     var size = MediaQuery.of(context).size;
 

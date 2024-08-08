@@ -1,36 +1,34 @@
 // lib/product_card.dart
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:store_app/api/product_service.dart';
 import 'package:store_app/models/product.dart';
+import 'package:store_app/models/user_info.dart';
+import 'package:store_app/providers/user_provider.dart';
 
-class ProductHorizontalCard extends StatefulWidget {
+class ProductHorizontalCard extends ConsumerStatefulWidget {
   final Product product;
   final VoidCallback onTap;
 
   ProductHorizontalCard({required this.product, required this.onTap});
 
   @override
-  _ProductHorizontalCardState createState() => _ProductHorizontalCardState();
+  ConsumerState<ProductHorizontalCard> createState() =>
+      _ProductHorizontalCardState();
 }
 
-class _ProductHorizontalCardState extends State<ProductHorizontalCard> {
-  bool isFavorite = false;
-
-  void toggleFavorite() {
-    setState(() {
-      isFavorite = !isFavorite;
-    });
-  }
-
+class _ProductHorizontalCardState extends ConsumerState<ProductHorizontalCard> {
   @override
   Widget build(BuildContext context) {
-    @override
-    void initState() {
-      super.initState();
-      isFavorite = true;
-    }
-
+    final userInfo = ref.watch(userInfoNotifierProvider).when(
+        data: (data) => data,
+        error: (s, t) =>
+            UserInfo(userName: '', favPrdoucts: [], cartProducts: []),
+        loading: () =>
+            UserInfo(userName: '', favPrdoucts: [], cartProducts: []));
+    final bool isFavourite = userInfo.favPrdoucts!.contains(widget.product.id);
+    late bool isFavorite = true;
     return GestureDetector(
       onTap: widget.onTap,
       child: Card(
@@ -74,7 +72,18 @@ class _ProductHorizontalCardState extends State<ProductHorizontalCard> {
                             isFavorite ? Icons.favorite : Icons.favorite_border,
                             color: isFavorite ? Colors.red : Colors.grey,
                           ),
-                          onPressed: toggleFavorite,
+                          onPressed: () async {
+                            List<String> updatedFavProducts =
+                                userInfo.favPrdoucts!;
+                            if (isFavourite) {
+                              updatedFavProducts.remove(widget.product.id);
+                            } else {
+                              updatedFavProducts.add(widget.product.id);
+                            }
+                            ref
+                                .read(userInfoNotifierProvider.notifier)
+                                .updateFavProducts(updatedFavProducts);
+                          },
                         ),
                       ],
                     ),
