@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:store_app/pages/login_page.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -96,11 +97,21 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
-  void _signUp() {
-    // Implement sign-up logic here
-    print('Sign Up with first name: ${_firstNameController.text}');
-    print('Sign Up with last name: ${_lastNameController.text}');
-    print('Sign Up with email: ${_emailController.text}');
+  void _signUp() async {
+    // supabase sign up
+    try {
+      final response = await Supabase.instance.client.auth.signUp(
+        email: _emailController.text,
+        password: _passwordController.text,
+      );
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text("sign up success"),
+      ));
+    } catch (error) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text("sign up error"),
+      ));
+    }
   }
 
   void _goToSignIn() {

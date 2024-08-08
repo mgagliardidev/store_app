@@ -19,11 +19,11 @@ ThemeData defaultTheme = ThemeData(
     actionsIconTheme: IconThemeData(color: Colors.black87),
   ),
   searchBarTheme: SearchBarThemeData(
-      backgroundColor:
-          WidgetStateColor.resolveWith((states) => secondaryColor),
+      backgroundColor: WidgetStateColor.resolveWith((states) => secondaryColor),
       elevation: WidgetStateProperty.all(0)),
   textTheme: const TextTheme().apply(bodyColor: Colors.black),
-  textSelectionTheme: const TextSelectionThemeData(cursorColor: Colors.black26),
+  textSelectionTheme: const TextSelectionThemeData(
+      cursorColor: Colors.black26, selectionHandleColor: Colors.grey),
   bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       unselectedItemColor: Colors.black87,
       elevation: 2,

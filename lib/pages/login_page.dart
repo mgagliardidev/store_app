@@ -1,20 +1,33 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:store_app/pages/main_page.dart';
 import 'package:store_app/pages/signup_page.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-class LoginPage extends StatefulWidget {
+class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  LoginPageState createState() => LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class LoginPageState extends ConsumerState<LoginPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
-  void _login() {}
+  void _login() async {
+    try {
+      final response = await Supabase.instance.client.auth.signInWithPassword(
+          password: _passwordController.text, email: _emailController.text);
+      //.then((value) async => {ref.watch(userProvider(value.user!.id))});
+      if (!mounted) return;
+      _goToHomePage();
+    } on AuthException catch (error) {
+      _showDialog(
+          error.message, const ["Check you email and password and try again."]);
+    }
+  }
 
   void _signInWithGoogle() {}
 
@@ -25,6 +38,32 @@ class _LoginPageState extends State<LoginPage> {
         context, MaterialPageRoute(builder: (context) => const SignUpPage()));
   }
 
+  void _showDialog(String title, List<String> content) {
+    showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              title: Text(title),
+              content: SingleChildScrollView(
+                child: ListBody(
+                  children: [
+                    for (var item in content) Text(item),
+                  ],
+                ),
+              ),
+              actions: [
+                TextButton(
+                  child: const Text(
+                    "OK",
+                    style: TextStyle(color: Colors.blue),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            ));
+  }
+
   void _goToHomePage() async {
     // Navigate to the Home page
     Route route = MaterialPageRoute(builder: (context) => MainPage());
@@ -33,6 +72,10 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    _emailController.text = "secuser@dotmail.com";
+
+    _passwordController.text = "password";
+
     return Scaffold(
         backgroundColor: Colors.white,
         body: Padding(

@@ -4,7 +4,10 @@ import 'package:store_app/components/custom_delegate_searchbar.dart';
 import 'package:store_app/components/product_card.dart';
 import 'package:store_app/components/promo_banner.dart';
 import 'package:store_app/models/product.dart';
+import 'package:store_app/models/user_info.dart';
 import 'package:store_app/providers/product_provider.dart';
+import 'package:store_app/providers/user_provider.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
@@ -24,12 +27,25 @@ class _HomePageState extends ConsumerState<HomePage> {
     return data.value ?? [];
   }
 
+  UserInfo fetchUserInfo() {
+    if (Supabase.instance.client.auth.currentUser == null) {
+      return UserInfo(userName: '', favPrdoucts: [], cartProducts: []);
+    }
+
+    final data =
+        ref.watch(userProvider(Supabase.instance.client.auth.currentUser!.id));
+    return data.value ??
+        UserInfo(userName: '', favPrdoucts: [], cartProducts: []);
+  }
+
   final double _crossAxisSpacing = 5, _mainAxisSpacing = 9;
   final int _crossAxisCount = 2;
 
   @override
   Widget build(BuildContext context) {
     final productList = fetchData();
+    final userInfo = fetchUserInfo();
+
     var size = MediaQuery.of(context).size;
 
     final double itemHeight = (size.height - kToolbarHeight - 24) / 2.8;
@@ -39,9 +55,9 @@ class _HomePageState extends ConsumerState<HomePage> {
       appBar: AppBar(
         title: RichText(
           text: TextSpan(children: [
-            const TextSpan(
-                text: 'Hi Matteo!\n',
-                style: TextStyle(
+            TextSpan(
+                text: 'Hi ${userInfo.userName}!\n',
+                style: const TextStyle(
                     fontWeight: FontWeight.w500,
                     color: Colors.grey,
                     fontSize: 18)),
@@ -54,16 +70,18 @@ class _HomePageState extends ConsumerState<HomePage> {
           ]),
         ),
         actions: [
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(shape: const CircleBorder()),
-            onPressed: () {},
-            child: ClipOval(
-                //TODO: replace with user avatar
-                child: Image.network(
-                    "https://4.bp.blogspot.com/-Jx21kNqFSTU/UXemtqPhZCI/AAAAAAAAh74/BMGSzpU6F48/s1600/funny-cat-pictures-047-001.jpg",
-                    fit: BoxFit.fill,
-                    width: 50,
-                    height: 50)),
+          // logout button
+          Padding(
+            padding: const EdgeInsets.only(right: 8.0, top: 2),
+            child: IconButton(
+              onPressed: () async {
+                await Supabase.instance.client.auth.signOut().then(
+                      (value) =>
+                          Navigator.of(context).pushReplacementNamed('/'),
+                    );
+              },
+              icon: const Icon(Icons.logout_outlined),
+            ),
           )
         ],
       ),
@@ -109,5 +127,31 @@ class _HomePageState extends ConsumerState<HomePage> {
         },
       ),
     );
+  }
+
+  void _showDialog(String title, List<String> content) {
+    showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              title: Text(title),
+              content: SingleChildScrollView(
+                child: ListBody(
+                  children: [
+                    for (var item in content) Text(item),
+                  ],
+                ),
+              ),
+              actions: [
+                TextButton(
+                  child: const Text(
+                    "OK",
+                    style: TextStyle(color: Colors.blue),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            ));
   }
 }
