@@ -23,22 +23,3 @@ class UserInfoNotifier extends _$UserInfoNotifier {
     state = AsyncData(await build());
   }
 }
-
-
-// final userServices = Provider((ref) => UserService());
-// UserInfo? userInfo;
-
-// @riverpod
-// Future<UserInfo> user(Ref ref, String id, bool isUpdate) async {
-//   if (userInfo == null || isUpdate) {
-//     userInfo ??= await ref.read(userServices).fetchDataById(id);
-//   }
-//   return userInfo!;
-// }
-
-// Future<void> updateFavProducts(
-//     WidgetRef ref, String userId, List<String> productsIds) async {
-//   await ref.read(userServices).updateFavProducts(userId, productsIds);
-
-//   ref.read(userProvider)
-// }
