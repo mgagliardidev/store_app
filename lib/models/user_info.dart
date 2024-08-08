@@ -4,7 +4,7 @@ import 'package:store_app/models/cart_product.dart';
 class UserInfo {
   late String userName;
   late List<String>? favPrdoucts;
-  late List<CartProducts>? cartProducts;
+  late List<CartProduct>? cartProducts;
 
   UserInfo({
     required this.userName,
@@ -16,7 +16,7 @@ class UserInfo {
     return UserInfo(
       userName: json['username'],
       favPrdoucts: List<String>.from(json['fav_products'] ?? []),
-      cartProducts: List<CartProducts>.from(json['cart_products'] ?? []),
+      cartProducts: List<CartProduct>.from(json['cart_products'] ?? []),
     );
   }
 }

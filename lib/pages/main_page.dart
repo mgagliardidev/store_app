@@ -37,14 +37,14 @@ class MainPage extends ConsumerWidget {
               icon: Icon(Icons.favorite_outline),
               label: 'Favorite',
               activeIcon: Icon(Icons.favorite)),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_cart_outlined),
-              label: 'Cart',
-              activeIcon: Icon(Icons.shopping_cart)),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.person_outline),
-              label: 'Profile',
-              activeIcon: Icon(Icons.person)),
+          // BottomNavigationBarItem(
+          //     icon: Icon(Icons.shopping_cart_outlined),
+          //     label: 'Cart',
+          //     activeIcon: Icon(Icons.shopping_cart)),
+          // BottomNavigationBarItem(
+          //     icon: Icon(Icons.person_outline),
+          //     label: 'Profile',
+          //     activeIcon: Icon(Icons.person)),
           BottomNavigationBarItem(
               icon: Icon(Icons.settings_outlined),
               label: 'Settings',

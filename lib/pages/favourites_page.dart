@@ -4,7 +4,9 @@ import 'package:store_app/api/product_service.dart';
 import 'package:store_app/components/product_horizontal_card.dart';
 import 'package:store_app/models/product.dart';
 import 'package:store_app/models/user_info.dart';
+import 'package:store_app/pages/product_page.dart';
 import 'package:store_app/providers/user_provider.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class FavouritesPage extends ConsumerWidget {
   const FavouritesPage({super.key});
@@ -43,13 +45,25 @@ class FavouritesPage extends ConsumerWidget {
 
   Widget _buildList(List<Product>? favPrdoucts) {
     if (favPrdoucts == null || favPrdoucts.isEmpty) {
-      return const Center(child: Text('No favourites yet'));
+      final String message = Supabase.instance.client.auth.currentUser == null
+          ? 'Sign in to see your favourites!'
+          : 'No favourites yet';
+      return Center(child: Text(message));
     }
 
     return ListView.builder(
       itemCount: favPrdoucts.length,
       itemBuilder: (context, index) {
-        return ProductHorizontalCard(product: favPrdoucts[index], onTap: () {});
+        return ProductHorizontalCard(
+            product: favPrdoucts[index],
+            onTap: () {
+              {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => ProductPage(
+                          product: favPrdoucts[index],
+                        )));
+              }
+            });
       },
     );
   }

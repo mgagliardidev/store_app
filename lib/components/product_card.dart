@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:store_app/api/product_service.dart';
+import 'package:store_app/main.dart';
 import 'package:store_app/models/user_info.dart';
 import 'package:store_app/pages/product_page.dart';
 import 'package:store_app/providers/user_provider.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import '../models/product.dart';
 
 class ProductCard extends ConsumerWidget {
@@ -54,6 +56,9 @@ class ProductCard extends ConsumerWidget {
                   selectedIcon: const Icon(Icons.favorite, color: Colors.black),
                   isSelected: isFavourite,
                   onPressed: () async {
+                    if (Supabase.instance.client.auth.currentUser == null) {
+                      return;
+                    }
                     List<String> updatedFavProducts = userInfo.favPrdoucts!;
                     if (isFavourite) {
                       updatedFavProducts.remove(product.id);

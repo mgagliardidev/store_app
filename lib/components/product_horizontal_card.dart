@@ -6,12 +6,14 @@ import 'package:store_app/api/product_service.dart';
 import 'package:store_app/models/product.dart';
 import 'package:store_app/models/user_info.dart';
 import 'package:store_app/providers/user_provider.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class ProductHorizontalCard extends ConsumerStatefulWidget {
   final Product product;
   final VoidCallback onTap;
 
-  const ProductHorizontalCard({super.key, required this.product, required this.onTap});
+  const ProductHorizontalCard(
+      {super.key, required this.product, required this.onTap});
 
   @override
   ConsumerState<ProductHorizontalCard> createState() =>
@@ -73,6 +75,10 @@ class _ProductHorizontalCardState extends ConsumerState<ProductHorizontalCard> {
                             color: isFavorite ? Colors.red : Colors.grey,
                           ),
                           onPressed: () async {
+                            if (Supabase.instance.client.auth.currentUser ==
+                                null) {
+                              return;
+                            }
                             List<String> updatedFavProducts =
                                 userInfo.favPrdoucts!;
                             if (isFavourite) {

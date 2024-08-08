@@ -1,5 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:store_app/api/user_service.dart';
+import 'package:store_app/models/cart_product.dart';
 import 'package:store_app/models/user_info.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -18,6 +19,12 @@ class UserInfoNotifier extends _$UserInfoNotifier {
         Supabase.instance.client.auth.currentUser!.id, productsIds);
     await updateState();
   }
+
+  // Future<void> updateCartProducts(List<CartProduct> products) async {
+  //   await UserService().updateCartProducts(
+  //       Supabase.instance.client.auth.currentUser!.id, products);
+  //   await updateState();
+  // }
 
   Future<void> updateState() async {
     state = AsyncData(await build());

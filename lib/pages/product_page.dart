@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:store_app/api/product_service.dart';
+import 'package:store_app/models/cart_product.dart';
 import 'package:store_app/models/product.dart';
 import 'package:store_app/models/user_info.dart';
 import 'package:store_app/providers/user_provider.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class ProductPage extends ConsumerStatefulWidget {
   final Product product;
@@ -80,6 +82,9 @@ class _ProductPageState extends ConsumerState<ProductPage> {
                 selectedIcon: const Icon(Icons.favorite, color: Colors.black),
                 isSelected: isFavourite,
                 onPressed: () async {
+                  if (Supabase.instance.client.auth.currentUser == null) {
+                    return;
+                  }
                   List<String> updatedFavProducts = userInfo.favPrdoucts!;
                   if (isFavourite) {
                     updatedFavProducts.remove(widget.product.id);
@@ -199,7 +204,24 @@ class _ProductPageState extends ConsumerState<ProductPage> {
                     size: 20,
                   ))
                 ])),
-                onPressed: () {},
+                onPressed: () {
+                  // List<CartProduct> updatedCartProducts =
+                  //     userInfo.cartProducts!;
+                  // if (updatedCartProducts
+                  //     .map((x) => x.productId)
+                  //     .contains(widget.product.id)) {
+                  //   updatedCartProducts
+                  //       .elementAt(updatedCartProducts.indexWhere(
+                  //           (x) => x.productId == widget.product.id))
+                  //       .quantity += 1;
+                  // } else {
+                  //   updatedCartProducts.add(
+                  //       CartProduct(productId: widget.product.id, quantity: 1));
+                  // }
+                  // ref
+                  //     .read(userInfoNotifierProvider.notifier)
+                  //     .updateCartProducts(updatedCartProducts);
+                },
               ),
             )
           ],
