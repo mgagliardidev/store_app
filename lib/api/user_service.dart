@@ -12,15 +12,4 @@ class UserService {
 
     return response[0];
   }
-
-  // Future<List<Product>> fetchDataBySearch(String query) {
-  //   final response = supabase
-  //       .from('products')
-  //       .select()
-  //       .or('name.ilike.%$query%,description.ilike.%$query%')
-  //       .withConverter<List<Product>>(
-  //           (data) => data.map(Product.fromJson).toList());
-
-  //   return response;
-  // }
 }

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:store_app/main.dart';
 import 'package:store_app/models/product.dart';
 
@@ -15,6 +17,16 @@ class ProductService {
         .withConverter<List<Product>>(
             (data) => data.map(Product.fromJson).toList());
 
+    return response;
+  }
+
+  Future<List<Product>> fetchRecordsById(List<String> ids) async {
+    final response = await supabase
+        .from('products')
+        .select()
+        .inFilter('id', ids)
+        .withConverter<List<Product>>(
+            (data) => data.map(Product.fromJson).toList());
     return response;
   }
 
