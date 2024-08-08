@@ -3,9 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:store_app/api/product_service.dart';
 import 'package:store_app/models/user_info.dart';
 import 'package:store_app/pages/product_page.dart';
-import 'package:store_app/providers/product_provider.dart';
 import 'package:store_app/providers/user_provider.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 import '../models/product.dart';
 
 class ProductCard extends ConsumerWidget {

@@ -1,4 +1,3 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:store_app/api/user_service.dart';
 import 'package:store_app/models/user_info.dart';

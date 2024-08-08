@@ -34,7 +34,7 @@ class FavouritesPage extends ConsumerWidget {
               future: products,
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  return _buildList(snapshot.data as List<Product>?);
+                  return _buildList(snapshot.data);
                 }
                 return const Center(child: CircularProgressIndicator());
               })),

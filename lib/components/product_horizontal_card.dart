@@ -11,7 +11,7 @@ class ProductHorizontalCard extends ConsumerStatefulWidget {
   final Product product;
   final VoidCallback onTap;
 
-  ProductHorizontalCard({required this.product, required this.onTap});
+  const ProductHorizontalCard({super.key, required this.product, required this.onTap});
 
   @override
   ConsumerState<ProductHorizontalCard> createState() =>
@@ -37,7 +37,7 @@ class _ProductHorizontalCardState extends ConsumerState<ProductHorizontalCard> {
         child: Container(
           width: 300,
           height: 100, // Define width for horizontal card
-          padding: EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8.0),
           child: Row(
             children: [
               // Image
@@ -48,7 +48,7 @@ class _ProductHorizontalCardState extends ConsumerState<ProductHorizontalCard> {
                   fit: BoxFit.fitHeight,
                 ),
               ),
-              SizedBox(width: 16.0),
+              const SizedBox(width: 16.0),
               // Product info and favorite button
               Expanded(
                 child: Column(
@@ -60,7 +60,7 @@ class _ProductHorizontalCardState extends ConsumerState<ProductHorizontalCard> {
                         Expanded(
                           child: Text(
                             widget.product.name,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
                             ),
@@ -87,10 +87,10 @@ class _ProductHorizontalCardState extends ConsumerState<ProductHorizontalCard> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 8.0),
+                    const SizedBox(height: 8.0),
                     Text(
                       '\$${widget.product.price.toStringAsFixed(2)}',
-                      style: TextStyle(fontSize: 16, color: Colors.green),
+                      style: const TextStyle(fontSize: 16, color: Colors.green),
                     ),
                   ],
                 ),
