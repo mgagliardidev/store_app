@@ -20,7 +20,6 @@ class LoginPageState extends ConsumerState<LoginPage> {
     try {
       final response = await Supabase.instance.client.auth.signInWithPassword(
           password: _passwordController.text, email: _emailController.text);
-      //.then((value) async => {ref.watch(userProvider(value.user!.id))});
       if (!mounted) return;
       _goToHomePage();
     } on AuthException catch (error) {
@@ -116,18 +115,18 @@ class LoginPageState extends ConsumerState<LoginPage> {
                 const SizedBox(height: 20),
 
                 // APPLE/GOOGLE
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    _buildSocialLoginButton(
-                        onTap: _signInWithApple,
-                        imagePath: 'assets/logos/apple_logo.png'),
-                    const SizedBox(width: 20),
-                    _buildSocialLoginButton(
-                        onTap: _signInWithGoogle,
-                        imagePath: 'assets/logos/google_logo.png'),
-                  ],
-                ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   children: [
+                //     _buildSocialLoginButton(
+                //         onTap: _signInWithApple,
+                //         imagePath: 'assets/logos/apple_logo.png'),
+                //     const SizedBox(width: 20),
+                //     _buildSocialLoginButton(
+                //         onTap: _signInWithGoogle,
+                //         imagePath: 'assets/logos/google_logo.png'),
+                //   ],
+                // ),
                 const SizedBox(height: 40),
 
                 // SIGN UP
