@@ -20,11 +20,11 @@ class UserInfoNotifier extends _$UserInfoNotifier {
     await updateState();
   }
 
-  // Future<void> updateCartProducts(List<CartProduct> products) async {
-  //   await UserService().updateCartProducts(
-  //       Supabase.instance.client.auth.currentUser!.id, products);
-  //   await updateState();
-  // }
+  Future<void> updateCartProducts(List<CartProduct> products) async {
+    await UserService().updateCartProducts(
+        Supabase.instance.client.auth.currentUser!.id, products);
+    await updateState();
+  }
 
   Future<void> updateState() async {
     state = AsyncData(await build());

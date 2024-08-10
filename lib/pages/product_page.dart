@@ -205,22 +205,22 @@ class _ProductPageState extends ConsumerState<ProductPage> {
                   ))
                 ])),
                 onPressed: () {
-                  // List<CartProduct> updatedCartProducts =
-                  //     userInfo.cartProducts!;
-                  // if (updatedCartProducts
-                  //     .map((x) => x.productId)
-                  //     .contains(widget.product.id)) {
-                  //   updatedCartProducts
-                  //       .elementAt(updatedCartProducts.indexWhere(
-                  //           (x) => x.productId == widget.product.id))
-                  //       .quantity += 1;
-                  // } else {
-                  //   updatedCartProducts.add(
-                  //       CartProduct(productId: widget.product.id, quantity: 1));
-                  // }
-                  // ref
-                  //     .read(userInfoNotifierProvider.notifier)
-                  //     .updateCartProducts(updatedCartProducts);
+                  List<CartProduct> updatedCartProducts =
+                      userInfo.cartProducts!;
+                  if (updatedCartProducts
+                      .map((x) => x.productId)
+                      .contains(widget.product.id)) {
+                    updatedCartProducts
+                        .elementAt(updatedCartProducts.indexWhere(
+                            (x) => x.productId == widget.product.id))
+                        .quantity += 1;
+                  } else {
+                    updatedCartProducts.add(
+                        CartProduct(productId: widget.product.id, quantity: 1));
+                  }
+                  ref
+                      .read(userInfoNotifierProvider.notifier)
+                      .updateCartProducts(updatedCartProducts);
                 },
               ),
             )
