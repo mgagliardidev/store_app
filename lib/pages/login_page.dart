@@ -71,6 +71,8 @@ class LoginPageState extends ConsumerState<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    _emailController.text = "secuser@dotmail.com";
+    _passwordController.text = "password";
     return Scaffold(
         backgroundColor: Colors.white,
         body: Padding(

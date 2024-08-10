@@ -14,9 +14,10 @@ class UserInfo {
 
   factory UserInfo.fromJson(Map<String, dynamic> json) {
     return UserInfo(
-      userName: json['username'],
-      favPrdoucts: List<String>.from(json['fav_products'] ?? []),
-      cartProducts: List<CartProduct>.from(json['cart_products'] ?? []),
-    );
+        userName: json['username'],
+        favPrdoucts: List<String>.from(json['fav_products'] ?? []),
+        cartProducts: (json['cart_products'] as List)
+            .map((el) => CartProduct.fromDynamicElement(el))
+            .toList());
   }
 }

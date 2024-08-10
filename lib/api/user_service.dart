@@ -7,10 +7,9 @@ class UserService {
         .from('user_info')
         .select('username,fav_products,cart_products')
         .eq('user_id', id)
-        .withConverter<List<UserInfo>>(
-            (data) => data.map(UserInfo.fromJson).toList());
+        .withConverter<UserInfo>((data) => UserInfo.fromJson(data.first));
 
-    return response[0];
+    return response;
   }
 
   Future<void> updateFavProducts(String id, List<String> productsIds) async {
