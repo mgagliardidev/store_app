@@ -13,15 +13,18 @@ class FavouritesPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final userInfo = ref.watch(userInfoNotifierProvider).when(
-        data: (data) => data,
-        error: (s, t) =>
-            UserInfo(userName: '', favPrdoucts: [], cartProducts: []),
-        loading: () =>
-            UserInfo(userName: '', favPrdoucts: [], cartProducts: []));
-    ProductService productService = ProductService();
+    // final userInfo = ref.watch(userInfoNotifierProvider).when(
+    //     data: (data) => data,
+    //     error: (s, t) =>
+    //         UserInfo(userName: '', favPrdoucts: [], cartProducts: []),
+    //     loading: () =>
+    //         UserInfo(userName: '', favPrdoucts: [], cartProducts: []));
+    // ProductService productService = ProductService();
+    // final products =
+    //     productService.fetchRecordsById(userInfo.favPrdoucts ?? []);
+
     final products =
-        productService.fetchRecordsById(userInfo.favPrdoucts ?? []);
+        ref.watch(userInfoNotifierProvider.notifier).getFavProducts();
 
     return Scaffold(
       appBar: AppBar(

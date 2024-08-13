@@ -74,7 +74,10 @@ class _HomePageState extends ConsumerState<HomePage> {
                           Navigator.of(context).pushReplacementNamed('/'),
                     );
               },
-              icon: const Icon(Icons.logout_outlined),
+              icon: Icon(
+                Icons.logout_outlined,
+                color: Theme.of(context).colorScheme.tertiary,
+              ),
             ),
           )
         ],
