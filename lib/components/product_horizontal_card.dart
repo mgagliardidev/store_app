@@ -25,10 +25,8 @@ class _ProductHorizontalCardState extends ConsumerState<ProductHorizontalCard> {
   Widget build(BuildContext context) {
     final userInfo = ref.watch(userInfoNotifierProvider).when(
         data: (data) => data,
-        error: (s, t) =>
-            UserInfo(userName: '', favPrdoucts: [], cartProducts: []),
-        loading: () =>
-            UserInfo(userName: '', favPrdoucts: [], cartProducts: []));
+        error: (s, t) => UserInfo(userName: '', favPrdoucts: [], cartItems: []),
+        loading: () => UserInfo(userName: '', favPrdoucts: [], cartItems: []));
     final bool isFavourite = userInfo.favPrdoucts!.contains(widget.product.id);
     late bool isFavorite = true;
     return GestureDetector(

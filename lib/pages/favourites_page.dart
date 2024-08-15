@@ -16,9 +16,9 @@ class FavouritesPage extends ConsumerWidget {
     // final userInfo = ref.watch(userInfoNotifierProvider).when(
     //     data: (data) => data,
     //     error: (s, t) =>
-    //         UserInfo(userName: '', favPrdoucts: [], cartProducts: []),
+    //         UserInfo(userName: '', favPrdoucts: [], cartItems: []),
     //     loading: () =>
-    //         UserInfo(userName: '', favPrdoucts: [], cartProducts: []));
+    //         UserInfo(userName: '', favPrdoucts: [], cartItems: []));
     // ProductService productService = ProductService();
     // final products =
     //     productService.fetchRecordsById(userInfo.favPrdoucts ?? []);

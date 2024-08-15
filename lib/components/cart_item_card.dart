@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:store_app/api/product_service.dart';
-import 'package:store_app/models/cart_product.dart';
+import 'package:store_app/models/cart_item.dart';
 import 'package:store_app/models/product.dart';
 import 'package:store_app/providers/user_provider.dart';
 
@@ -44,7 +44,7 @@ class _CartItemCardState extends ConsumerState<CartItemCard> {
       quantity--;
       ref
           .read(userInfoNotifierProvider.notifier)
-          .updateSingleCartProduct(CartProduct(
+          .updateSingleCartProduct(CartItem(
             productId: widget.product.id,
             quantity: quantity,
           ));
@@ -55,7 +55,7 @@ class _CartItemCardState extends ConsumerState<CartItemCard> {
     quantity++;
     ref
         .read(userInfoNotifierProvider.notifier)
-        .updateSingleCartProduct(CartProduct(
+        .updateSingleCartProduct(CartItem(
           productId: widget.product.id,
           quantity: quantity,
         ));
@@ -65,7 +65,7 @@ class _CartItemCardState extends ConsumerState<CartItemCard> {
   //   if (quantity >= 1) {
   //     ref
   //         .read(userInfoNotifierProvider.notifier)
-  //         .updateSingleCartProduct(CartProduct(
+  //         .updateSingleCartProduct(CartItem(
   //           productId: widget.product.id,
   //           quantity: quantity,
   //         ));
@@ -82,7 +82,7 @@ class _CartItemCardState extends ConsumerState<CartItemCard> {
     quantity = ref
             .watch(userInfoNotifierProvider)
             .value
-            ?.cartProducts
+            ?.cartItems
             ?.firstWhere((el) => el.productId == widget.product.id)
             .quantity ??
         1;

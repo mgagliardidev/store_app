@@ -13,7 +13,7 @@ class MainPage extends ConsumerWidget {
   final List<Widget> pages = <Widget>[
     const HomePage(),
     const FavouritesPage(),
-    const CartPage(),
+    CartPage(),
     //const ProfilePage(),
     const SettingsPage()
   ];

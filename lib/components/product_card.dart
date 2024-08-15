@@ -17,10 +17,8 @@ class ProductCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final userInfo = ref.watch(userInfoNotifierProvider).when(
         data: (data) => data,
-        error: (s, t) =>
-            UserInfo(userName: '', favPrdoucts: [], cartProducts: []),
-        loading: () =>
-            UserInfo(userName: '', favPrdoucts: [], cartProducts: []));
+        error: (s, t) => UserInfo(userName: '', favPrdoucts: [], cartItems: []),
+        loading: () => UserInfo(userName: '', favPrdoucts: [], cartItems: []));
     final bool isFavourite = userInfo.favPrdoucts!.contains(product.id);
     return GestureDetector(
       onTap: () {

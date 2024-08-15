@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:store_app/api/product_service.dart';
-import 'package:store_app/models/cart_product.dart';
+import 'package:store_app/models/cart_item.dart';
 import 'package:store_app/models/product.dart';
 import 'package:store_app/models/user_info.dart';
 import 'package:store_app/providers/user_provider.dart';
@@ -33,10 +33,8 @@ class _ProductPageState extends ConsumerState<ProductPage> {
   Widget build(BuildContext context) {
     final userInfo = ref.watch(userInfoNotifierProvider).when(
         data: (data) => data,
-        error: (s, t) =>
-            UserInfo(userName: '', favPrdoucts: [], cartProducts: []),
-        loading: () =>
-            UserInfo(userName: '', favPrdoucts: [], cartProducts: []));
+        error: (s, t) => UserInfo(userName: '', favPrdoucts: [], cartItems: []),
+        loading: () => UserInfo(userName: '', favPrdoucts: [], cartItems: []));
     final bool isFavourite = userInfo.favPrdoucts!.contains(widget.product.id);
     return Scaffold(
       appBar: PreferredSize(
@@ -205,8 +203,7 @@ class _ProductPageState extends ConsumerState<ProductPage> {
                   ))
                 ])),
                 onPressed: () {
-                  List<CartProduct> updatedCartProducts =
-                      userInfo.cartProducts!;
+                  List<CartItem> updatedCartProducts = userInfo.cartItems!;
                   if (updatedCartProducts
                       .map((x) => x.productId)
                       .contains(widget.product.id)) {
@@ -216,11 +213,11 @@ class _ProductPageState extends ConsumerState<ProductPage> {
                         .quantity += 1;
                   } else {
                     updatedCartProducts.add(
-                        CartProduct(productId: widget.product.id, quantity: 1));
+                        CartItem(productId: widget.product.id, quantity: 1));
                   }
                   ref
                       .read(userInfoNotifierProvider.notifier)
-                      .updateCartProducts(updatedCartProducts);
+                      .updateCartItems(updatedCartProducts);
                 },
               ),
             )

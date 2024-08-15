@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:store_app/api/product_service.dart';
 import 'package:store_app/components/cart_item_card.dart';
 import 'package:store_app/components/product_horizontal_card.dart';
+import 'package:store_app/models/cart_product.dart';
 import 'package:store_app/models/product.dart';
 import 'package:store_app/models/user_info.dart';
 import 'package:store_app/pages/product_page.dart';
@@ -16,18 +17,10 @@ class CartPage extends ConsumerWidget {
 
   double totalCartPrice = 0.0;
 
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    
     final products =
         ref.watch(userInfoNotifierProvider.notifier).getCartProducts();
-    
-    // final c = ref
-    //     .read(userInfoNotifierProvider)
-    //     .value
-    //     ?.cartProducts
-    //     ?.firstWhere((product) => product.productId == 'ff').quantity;
 
     return Scaffold(
       appBar: AppBar(
@@ -69,8 +62,7 @@ class CartPage extends ConsumerWidget {
                             fontSize: 18,
                             color: Colors.grey)),
                     TextSpan(
-                        text:
-                            '\$${await ref.read(userInfoNotifierProvider.notifier).getTotalCartPrice()}',
+                        text: '\$',
                         style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 18,
@@ -91,13 +83,13 @@ class CartPage extends ConsumerWidget {
     );
   }
 
-  // double getTotalPrice(WidgetRef ref, List<Product>? cartProducts) {
+  // double getTotalPrice(WidgetRef ref, List<Product>? cartItems) {
   //   double total = 0.0;
-  //   cartProducts!.forEach((el) => {
+  //   cartItems!.forEach((el) => {
   //         total += ref
   //                 .read(userInfoNotifierProvider)
   //                 .value!
-  //                 .cartProducts!
+  //                 .cartItems!
   //                 .firstWhere((e) => e.productId == el.id)
   //                 .quantity *
   //             el.price
@@ -106,7 +98,7 @@ class CartPage extends ConsumerWidget {
   //   return total;
   // }
 
-  Widget _buildList(List<Product>? cartProducts) {
+  Widget _buildList(List<CartProduct>? cartProducts) {
     if (cartProducts == null || cartProducts.isEmpty) {
       final String message = Supabase.instance.client.auth.currentUser == null
           ? 'Sign in to see your favourites!'
@@ -118,13 +110,13 @@ class CartPage extends ConsumerWidget {
       itemCount: cartProducts.length,
       itemBuilder: (context, index) {
         return CartItemCard(
-            product: cartProducts[index],
+            product: cartProducts[index].product,
             onRemove: () {},
             onTap: () {
               {
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => ProductPage(
-                          product: cartProducts[index],
+                          product: cartProducts[index].product,
                         )));
               }
             });

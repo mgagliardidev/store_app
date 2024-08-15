@@ -1,5 +1,5 @@
 import 'package:store_app/main.dart';
-import 'package:store_app/models/cart_product.dart';
+import 'package:store_app/models/cart_item.dart';
 import 'package:store_app/models/user_info.dart';
 
 class UserService {
@@ -19,9 +19,9 @@ class UserService {
         .update({'fav_products': productsIds}).eq('user_id', id);
   }
 
-  Future<void> updateCartProducts(String id, List<CartProduct> products) async {
+  Future<void> updateCartItems(String id, List<CartItem> cartItem) async {
     await supabase
         .from('user_info')
-        .update({'cart_products': products}).eq('user_id', id);
+        .update({'cart_products': cartItem}).eq('user_id', id);
   }
 }

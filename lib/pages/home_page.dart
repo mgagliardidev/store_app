@@ -35,10 +35,8 @@ class _HomePageState extends ConsumerState<HomePage> {
     final productList = fetchData();
     final userInfo = ref.watch(userInfoNotifierProvider).when(
         data: (data) => data,
-        error: (s, t) =>
-            UserInfo(userName: '', favPrdoucts: [], cartProducts: []),
-        loading: () =>
-            UserInfo(userName: '', favPrdoucts: [], cartProducts: []));
+        error: (s, t) => UserInfo(userName: '', favPrdoucts: [], cartItems: []),
+        loading: () => UserInfo(userName: '', favPrdoucts: [], cartItems: []));
 
     var size = MediaQuery.of(context).size;
 
